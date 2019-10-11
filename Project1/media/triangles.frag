@@ -1,8 +1,18 @@
 #version 450 core
 
+
 out vec4 fColor;
 
 void main()
 {
-    fColor = vec4(0.5, 0.4, 0.8, 1.0);
+	
+
+    if(position.x > 0.5f && position.y > 0.5f)
+	{
+		fColor = vec4(0.5, 1, 0.5, 1.0);
+	}
+	else
+	{
+		fColor = vec4(1, 1, 0.5, 1.0);
+	}
 }

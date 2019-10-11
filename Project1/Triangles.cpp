@@ -9,11 +9,6 @@
 #include "GLFW/glfw3.h"
 #include "LoadShaders.h"
 
-
-
-
-
-
 enum VAO_IDs { Triangles, NumVAOs };
 enum Buffer_IDs { ArrayBuffer, NumBuffers };
 enum Attrib_IDs { vPosition = 0 };
@@ -21,7 +16,7 @@ enum Attrib_IDs { vPosition = 0 };
 GLuint  VAOs[NumVAOs];
 GLuint  Buffers[NumBuffers];
 
-const GLuint  NumVertices = 6;
+const GLuint  NumVertices = 24;
 
 //----------------------------------------------------------------------------
 //
@@ -37,9 +32,20 @@ init(void)
 	glBindVertexArray(VAOs[Triangles]);
 
 	GLfloat  vertices[NumVertices][2] = {
-		{ -0.90f, -0.90f }, {  0.85f, -0.90f }, { -0.90f,  0.85f },  // Triangle 1
-		{  0.90f, -0.85f }, {  0.90f,  0.90f }, { -0.85f,  0.90f }   // Triangle 2
+		{ -0.33f, 1 }, {  -0.3f, 1 }, { -0.33f, -1 },  // Triangle 1
+		{ -0.3f, -1 }, {  -0.33f, -1 }, { -0.3f, 1 },  // Triangle 2
+
+		{ 0.33f, 1 }, {  0.3f, 1 }, { 0.33f, -1 },  
+		{ 0.3f, -1 }, {  0.33f, -1 }, { 0.3f, 1 },
+
+		{ 1, -0.33f }, {  1, -0.3f }, { -1, -0.33f },
+		{ -1, -0.3f }, {  -1, -0.33f }, { 1, -0.3f },
+
+		{ 1, 0.33f }, {  1, 0.3f }, { -1, 0.33f },
+		{ -1, 0.3f }, {  -1, 0.33f }, { 1, 0.3f }
 	};
+
+	
 
 	glGenBuffers(NumBuffers, Buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
@@ -71,6 +77,10 @@ display(void)
 	static const float black[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	glClearBufferfv(GL_COLOR, 0, black);
+
+	/*glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	glColor3f(0.0f, 1.0f, 0.0f);*/
 
 	glBindVertexArray(VAOs[Triangles]);
 	glDrawArrays(GL_TRIANGLES, 0, NumVertices);
